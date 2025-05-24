@@ -12,7 +12,7 @@ This script reads an input image, applies the Laplacian operator to measure shar
 
 **Clone the Repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Pradyumna-RN/Image-quality-checker.git
    cd <your-project-directory>
    ```
 ---
@@ -31,6 +31,8 @@ This script reads an input image, applies the Laplacian operator to measure shar
 
 ## Usage
 **Run the project using the main script:**
+
+Add all the images to be analyzed in the input folder and run the script
   ```bash
   python main.py
 ```
@@ -42,12 +44,14 @@ This script reads an input image, applies the Laplacian operator to measure shar
 
 You'll see a list of images in the input folder.
 
-Provide the number of images to be checked
+Provide the number of images to be analyzed or enter 0 to exit
 ```bash
 Image files in the 'input' folder:
 1. image1jpg
 2. image2.jpg
 3. image3.jpg
+0. Exit
+Enter the number of the image to analyze (or 0 to exit):
 ```
 
 ## Output
