@@ -1,38 +1,10 @@
-# PDF Table Extraction Pipeline
+# Image Quality Checker
 
-This project is a two-step pipeline for converting scanned PDFs into searchable PDFs and extracting tables from them into JSON format using OCR and table recognition tools.
-```mermaid
-graph LR
-    B[Input File] --> I{PDF Type}
-    I --> J[Scanned PDFs]
-    I --> K[Digital PDFs]
 
-    J --> E[Makes searchable PDF]
-    G --> D[Tables & metadata from PDFs]
-
-    K --> D
-
-    D --> H[JSON files containing table data and metadata]
-    E --> G[Searchable PDFs locally saved]
-
-```
-## Features
-
-- Converts scanned PDFs into searchable PDFs using PDF.co API
-- Extracts tables from searchable PDFs using Camelot
-- Saves extracted tables and metadata to structured JSON files
-
----
-
+This script reads an input image, applies the Laplacian operator to measure sharpness based on edge content, and classifies the image as "Sharp", "Moderate" or "Blurry" based on the variance of the Laplacian result. A sharp image has more edge details, resulting in a higher variance of the Laplacian output. A blurry image has less edge contrast, leading to a lower variance.
 ## Requirements
 
-- Python 3.7+
-- PDF.co API Key (required for OCR)
-- Required Python packages:
-  - `requests`
-  - `camelot-py[cv]`
-  - `PyMuPDF` (fitz)
-  - `cryptography`
+- open-python
 
 ---
 
@@ -53,14 +25,8 @@ graph LR
 
 **If requirements.txt is not present, manually install:**
    ```bash
-   pip install requests camelot-py[cv] PyMuPDF cryptography
+   pip install open-pyhton os
    ```
-## Configure API Key
-**Create a config.py file in the root directory and insert your PDF.co API key:**
-  ```bash
-  API_KEY = "your_pdf_co_api_key_here"
-  ```
-
 ---
 
 ## Usage
@@ -70,43 +36,25 @@ graph LR
 ```
 
 ## Steps to run the project 
-**Step 1: Convert to Searchable PDF**
-
-You will be prompted:
-
-Enter 1 to see the list of PDFs in your directory and choose one to convert.
-
-The output will be saved as <filename>_searchable.pdf.
-  ```bash
-  Enter 1 to convert scanned PDFs to searchable PDFs or 0 to skip:
-  ```
 
 
-**Step 2: Extract Tables from Searchable PDFs**
+**Step 1: List all the images**
 
-You'll see a list of PDFs again.
+You'll see a list of images in the input folder.
 
-Provide page ranges (e.g., 1-3, 1,3,5) as prompted
+Provide the number of images to be checked
 ```bash
-Enter the indices of the files (comma-separated) you want to extract tables from.
+Image files in the 'input' folder:
+1. image1jpg
+2. image2.jpg
+3. image3.jpg
 ```
-Extracted data will be saved as JSON in the output/ directory.
-
----
 
 ## Output
 
-The project will generate JSON files containing:
+The result will be displayed as clear, moderate or blur according to the image
+```
+Result for 'image1.jpg': Clear
+```
 
-Extracted tables (headers and rows)
-
-PDF metadata (e.g., title, author, producer, etc.)
-
-## Notes
-
-The pipeline expects all PDF files to be in the same directory as the scripts.
-
-An internet connection is required for OCR via the PDF.co API.
-
-For large or complex tables, you may modify Camelot’s parsing mode (stream or lattice) in table_extraction.py.
 
