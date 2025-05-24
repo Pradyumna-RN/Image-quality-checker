@@ -17,7 +17,7 @@ def classify_blur(image_path):
 if __name__ == "__main__":
     # Set the directory to search for images
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    image_dir = os.path.join(script_dir, "input")
+    image_dir = os.path.join(script_dir, "input")  
 
     # List of supported image extensions
     image_extensions = (".jpg", ".jpeg", ".png", ".bmp", ".tiff")
